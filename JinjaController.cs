@@ -16,6 +16,10 @@ public class JinjaController : MonoBehaviour {
 	[SerializeField]
 	float gravity = 0.02f;
 
+	//field for jump
+	[SerializeField]
+	float jump = 0.3f;
+
 	Vector3 velocity = Vector3.zero;
 
 	// Start is called before the first frame update
@@ -42,6 +46,16 @@ public class JinjaController : MonoBehaviour {
 		//check if left arrow key is down, move jinja left
 		if (Input.GetKey(KeyCode.LeftArrow)) {
 			velocity += Vector3.left * acceleration;
+		}
+
+		//jumping
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			//is jinja on a platform?
+			RaycastHit2D hitPlatform = Physics2D.Raycast(tf.position, Vector3.down, 0.1f);
+			if (hitPlatform.collider != null) {
+				//jump!
+				velocity.y = jump;
+			}
 		}
 
 		tf.position += velocity;
