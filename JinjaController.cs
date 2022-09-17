@@ -45,5 +45,24 @@ public class JinjaController : MonoBehaviour {
 		}
 
 		tf.position += velocity;
+
+		//Raycast to detect platforms
+		Vector3 origin = tf.position - velocity;
+
+		Vector3 direction = velocity;
+
+		float length = velocity.magnitude;
+
+		//shoot a ray from Jinja's feet in the direction she's going
+		RaycastHit2D hit = Physics2D.Raycast(origin, direction, length);
+
+		//did the ray hit a platform AND is jinja falling?
+		if (hit.collider != null && velocity.y < 0) {
+			//place Jinja's position above the playform
+			tf.position = new Vector3(tf.position.x, hit.point.y, tf.position.z);
+
+			//reset y velocity
+			velocity.y = 0;
+		}
 	}
 }
