@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class JinjaController : MonoBehaviour {
+
+	//field for acceleration
+	[SerializeField]
+	float acceleration = 0.1f;
+
+	//field for friction
+	[SerializeField]
+	float friction = 0.9f;
+
+	Vector3 velocity = Vector3.zero;
+
 	// Start is called before the first frame update
 	void Start() {
 
@@ -13,14 +24,19 @@ public class JinjaController : MonoBehaviour {
 
 		Transform tf = GetComponent<Transform>();
 
+		//add friction to Jinja
+		velocity *= friction;
+
 		//check if the arrow key is down, move jinja
 		if (Input.GetKey(KeyCode.RightArrow)) {
-			tf.position += Vector3.right * 0.1f;
+			velocity += Vector3.right * acceleration;
 		}
 
 		//check if left arrow key is down, move jinja left
 		if (Input.GetKey(KeyCode.LeftArrow)) {
-			tf.position += Vector3.left * 0.1f;
+			velocity += Vector3.left * acceleration;
 		}
+
+		tf.position += velocity;
 	}
 }
