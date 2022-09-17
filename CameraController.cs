@@ -17,7 +17,9 @@ public class CameraController : MonoBehaviour {
 
 		Vector3 current = GetComponent<Transform>().position;
 
-		Vector3 target = jinjaTransform.position;
+		Vector3 target = jinjaTransform.position + Vector3.up;
+
+		target.z = current.z;
 
 		Vector3 newPosition = Vector3.Lerp(current, target, 0.1f);
 
