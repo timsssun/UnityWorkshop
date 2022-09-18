@@ -87,11 +87,16 @@ public class JinjaController : MonoBehaviour {
 		animator.ResetTrigger("Jump");
 
 		//play run animation
-		if (Input.GetKey(KeyCode.RightArrow) ||
-			Input.GetKey(KeyCode.LeftArrow) ||
-			Mathf.Abs(velocity.x) >= acceleration) {
+		RaycastHit2D hitGroud = Physics2D.Raycast(tf.position, Vector3.down, 0.1f);
+		if (hitGroud.collider == null) {
+			animator.SetTrigger("Jump");
+
+		} else if (Input.GetKey(KeyCode.RightArrow) ||
+			  Input.GetKey(KeyCode.LeftArrow) ||
+			  Mathf.Abs(velocity.x) >= acceleration) {
 			//if keys are down or jinja is moving
 			animator.SetTrigger("Run");
+
 		} else {
 			//jinja is not moving
 			animator.SetTrigger("Idle");
