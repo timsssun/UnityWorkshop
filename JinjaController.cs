@@ -110,5 +110,11 @@ public class JinjaController : MonoBehaviour {
 			tf.localScale = new Vector3(directionSign, 1, 1);
 		}
 
+		//respawn
+		if (tf.position.y < -10) {
+			tf.position = Vector3.zero;
+			velocity = Vector3.zero;
+		}
+
 	}
 }
