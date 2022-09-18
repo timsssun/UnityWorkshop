@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JinjaController : MonoBehaviour {
 
@@ -19,6 +20,10 @@ public class JinjaController : MonoBehaviour {
 	//field for jump
 	[SerializeField]
 	float jump = 0.3f;
+
+	//Scene to go to
+	[SerializeField]
+	string nextLevelName = "Main";
 
 	Vector3 velocity = Vector3.zero;
 
@@ -121,6 +126,8 @@ public class JinjaController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "Finish") {
 			GetComponent<AudioSource>().Play();
+			Debug.Log("Something with finish tag entered Jinja");
+			SceneManager.LoadScene(nextLevelName);
 		}
 	}
 }
