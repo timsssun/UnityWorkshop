@@ -102,5 +102,13 @@ public class JinjaController : MonoBehaviour {
 			animator.SetTrigger("Idle");
 			velocity.x = 0;
 		}
+
+		//change direction Jinja is facing
+		if (Mathf.Abs(velocity.x) >= acceleration) { //if jinja is moving
+
+			float directionSign = Mathf.Sign(velocity.x);
+			tf.localScale = new Vector3(directionSign, 1, 1);
+		}
+
 	}
 }
