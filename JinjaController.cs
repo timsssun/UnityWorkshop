@@ -78,5 +78,19 @@ public class JinjaController : MonoBehaviour {
 			//reset y velocity
 			velocity.y = 0;
 		}
+
+		//Animation
+
+		Animator animator = GetComponentInChildren<Animator>();
+		animator.ResetTrigger("Idle");
+		animator.ResetTrigger("Run");
+		animator.ResetTrigger("Jump");
+
+		//play run animation
+		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow)) {
+			animator.SetTrigger("Run");
+		} else {
+			animator.SetTrigger("Idle");
+		}
 	}
 }
